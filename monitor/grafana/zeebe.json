@@ -1899,7 +1899,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Not processed",
+          "title": "Number of records not processed",
           "type": "gauge"
         },
         {
