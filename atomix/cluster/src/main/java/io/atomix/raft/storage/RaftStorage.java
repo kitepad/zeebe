@@ -20,7 +20,6 @@ import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import io.atomix.raft.snapshot.PersistedSnapshotStore;
 import io.atomix.raft.storage.log.RaftLog;
 import io.atomix.raft.storage.log.entry.RaftLogEntry;
 import io.atomix.raft.storage.system.MetaStore;
@@ -33,6 +32,7 @@ import io.atomix.storage.journal.index.JournalIndex;
 import io.atomix.storage.statistics.StorageStatistics;
 import io.atomix.utils.serializer.Namespace;
 import io.atomix.utils.serializer.Serializer;
+import io.zeebe.snapshots.raft.PersistedSnapshotStore;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

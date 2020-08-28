@@ -7,12 +7,12 @@
  */
 package io.zeebe.logstreams.util;
 
-import io.atomix.raft.snapshot.PersistedSnapshot;
-import io.atomix.raft.snapshot.PersistedSnapshotListener;
-import io.atomix.raft.snapshot.PersistedSnapshotStore;
-import io.atomix.raft.snapshot.ReceivedSnapshot;
-import io.atomix.raft.snapshot.SnapshotChunkReader;
 import io.atomix.utils.time.WallClockTimestamp;
+import io.zeebe.snapshots.raft.PersistedSnapshot;
+import io.zeebe.snapshots.raft.PersistedSnapshotListener;
+import io.zeebe.snapshots.raft.PersistedSnapshotStore;
+import io.zeebe.snapshots.raft.ReceivedSnapshot;
+import io.zeebe.snapshots.raft.SnapshotChunkReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;

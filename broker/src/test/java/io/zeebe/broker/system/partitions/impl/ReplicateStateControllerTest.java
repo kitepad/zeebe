@@ -9,15 +9,15 @@ package io.zeebe.broker.system.partitions.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.atomix.raft.snapshot.SnapshotChunk;
 import io.atomix.raft.zeebe.ZeebeEntry;
 import io.atomix.storage.journal.Indexed;
 import io.zeebe.broker.system.partitions.SnapshotReplication;
-import io.zeebe.broker.system.partitions.snapshot.impl.FileBasedSnapshotStore;
-import io.zeebe.broker.system.partitions.snapshot.impl.FileBasedSnapshotStoreFactory;
 import io.zeebe.db.impl.DefaultColumnFamily;
 import io.zeebe.db.impl.rocksdb.ZeebeRocksDbFactory;
 import io.zeebe.logstreams.util.RocksDBWrapper;
+import io.zeebe.snapshots.broker.impl.FileBasedSnapshotStore;
+import io.zeebe.snapshots.broker.impl.FileBasedSnapshotStoreFactory;
+import io.zeebe.snapshots.raft.SnapshotChunk;
 import io.zeebe.test.util.AutoCloseableRule;
 import java.io.IOException;
 import java.util.ArrayList;

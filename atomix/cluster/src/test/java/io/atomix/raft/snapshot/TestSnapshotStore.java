@@ -15,6 +15,10 @@
  */
 package io.atomix.raft.snapshot;
 
+import io.zeebe.snapshots.raft.PersistedSnapshot;
+import io.zeebe.snapshots.raft.PersistedSnapshotListener;
+import io.zeebe.snapshots.raft.PersistedSnapshotStore;
+import io.zeebe.snapshots.raft.ReceivedSnapshot;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;

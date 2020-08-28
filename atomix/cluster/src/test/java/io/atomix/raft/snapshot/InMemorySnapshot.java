@@ -16,6 +16,10 @@
 package io.atomix.raft.snapshot;
 
 import io.atomix.utils.time.WallClockTimestamp;
+import io.zeebe.snapshots.raft.PersistedSnapshot;
+import io.zeebe.snapshots.raft.ReceivedSnapshot;
+import io.zeebe.snapshots.raft.SnapshotChunk;
+import io.zeebe.snapshots.raft.SnapshotChunkReader;
 import io.zeebe.util.StringUtil;
 import java.io.IOException;
 import java.nio.ByteBuffer;

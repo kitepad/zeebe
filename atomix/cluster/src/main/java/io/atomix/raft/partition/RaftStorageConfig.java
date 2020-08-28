@@ -19,9 +19,10 @@ package io.atomix.raft.partition;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.esotericsoftware.kryo.serializers.FieldSerializer.Optional;
-import io.atomix.raft.snapshot.PersistedSnapshotStoreFactory;
 import io.atomix.storage.StorageLevel;
 import io.atomix.utils.memory.MemorySize;
+import io.zeebe.snapshots.broker.impl.FileBasedSnapshotStoreFactory;
+import io.zeebe.snapshots.raft.PersistedSnapshotStoreFactory;
 
 /** Raft storage configuration. */
 public class RaftStorageConfig {
@@ -32,6 +33,8 @@ public class RaftStorageConfig {
   private static final int DEFAULT_MAX_ENTRY_SIZE = 1024 * 1024;
   private static final boolean DEFAULT_FLUSH_ON_COMMIT = false;
   private static final long DEFAULT_FREE_DISK_SPACE = 1024L * 1024 * 1024 * 1; // 1GB
+  private static final PersistedSnapshotStoreFactory DEFAULT_SNAPSHOT_STORE_FACTORY =
+      new FileBasedSnapshotStoreFactory();
 
   private String directory;
   private StorageLevel level = DEFAULT_STORAGE_LEVEL;
@@ -41,7 +44,8 @@ public class RaftStorageConfig {
   private long freeDiskSpace = DEFAULT_FREE_DISK_SPACE;
 
   @Optional("SnapshotStoreFactory")
-  private PersistedSnapshotStoreFactory persistedSnapshotStoreFactory;
+  private PersistedSnapshotStoreFactory persistedSnapshotStoreFactory =
+      DEFAULT_SNAPSHOT_STORE_FACTORY;
 
   /**
    * Returns the partition data directory.

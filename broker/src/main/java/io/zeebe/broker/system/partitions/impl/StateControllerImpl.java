@@ -7,18 +7,18 @@
  */
 package io.zeebe.broker.system.partitions.impl;
 
-import io.atomix.raft.snapshot.PersistedSnapshot;
-import io.atomix.raft.snapshot.PersistedSnapshotListener;
-import io.atomix.raft.snapshot.ReceivedSnapshot;
-import io.atomix.raft.snapshot.SnapshotChunk;
-import io.atomix.raft.snapshot.TransientSnapshot;
 import io.zeebe.broker.system.partitions.AtomixRecordEntrySupplier;
 import io.zeebe.broker.system.partitions.SnapshotReplication;
 import io.zeebe.broker.system.partitions.StateController;
-import io.zeebe.broker.system.partitions.snapshot.ActivePersistedSnapshotStore;
 import io.zeebe.db.ZeebeDb;
 import io.zeebe.db.ZeebeDbFactory;
 import io.zeebe.logstreams.impl.Loggers;
+import io.zeebe.snapshots.broker.ActivePersistedSnapshotStore;
+import io.zeebe.snapshots.raft.PersistedSnapshot;
+import io.zeebe.snapshots.raft.PersistedSnapshotListener;
+import io.zeebe.snapshots.raft.ReceivedSnapshot;
+import io.zeebe.snapshots.raft.SnapshotChunk;
+import io.zeebe.snapshots.raft.TransientSnapshot;
 import io.zeebe.util.FileUtil;
 import java.io.IOException;
 import java.nio.file.Files;

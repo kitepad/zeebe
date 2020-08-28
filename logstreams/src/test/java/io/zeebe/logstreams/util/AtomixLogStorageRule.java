@@ -10,7 +10,6 @@ package io.zeebe.logstreams.util;
 import static org.mockito.Mockito.spy;
 
 import io.atomix.raft.partition.impl.RaftNamespaces;
-import io.atomix.raft.snapshot.PersistedSnapshotStore;
 import io.atomix.raft.storage.RaftStorage;
 import io.atomix.raft.storage.log.RaftLog;
 import io.atomix.raft.storage.log.RaftLogReader;
@@ -28,6 +27,7 @@ import io.zeebe.logstreams.storage.atomix.AtomixAppenderSupplier;
 import io.zeebe.logstreams.storage.atomix.AtomixLogStorage;
 import io.zeebe.logstreams.storage.atomix.AtomixReaderFactory;
 import io.zeebe.logstreams.storage.atomix.ZeebeIndexAdapter;
+import io.zeebe.snapshots.raft.PersistedSnapshotStore;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
