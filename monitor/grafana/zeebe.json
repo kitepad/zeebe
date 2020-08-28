@@ -1844,7 +1844,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Not Exported Records",
+          "title": "Number of records not exported",
           "type": "gauge"
         },
         {
