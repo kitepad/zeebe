@@ -65,7 +65,7 @@ class FileChannelJournalSegmentWriter<E> implements JournalWriter<E> {
     this.segment = segment;
     this.maxEntrySize = maxEntrySize;
     this.index = index;
-    this.memory = ByteBuffer.allocate((maxEntrySize + Integer.BYTES + Integer.BYTES) * 2);
+    this.memory = ByteBuffer.allocate((maxEntrySize + Integer.BYTES + Integer.BYTES));
     memory.limit(0);
     this.namespace = namespace;
     this.firstIndex = segment.index();
