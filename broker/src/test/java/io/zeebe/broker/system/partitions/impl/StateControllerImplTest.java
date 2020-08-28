@@ -15,6 +15,7 @@ import io.atomix.storage.journal.Indexed;
 import io.zeebe.db.impl.DefaultColumnFamily;
 import io.zeebe.db.impl.rocksdb.ZeebeRocksDbFactory;
 import io.zeebe.logstreams.util.RocksDBWrapper;
+import io.zeebe.snapshots.broker.impl.FileBasedSnapshotMetadata;
 import io.zeebe.snapshots.broker.impl.FileBasedSnapshotStore;
 import io.zeebe.snapshots.broker.impl.FileBasedSnapshotStoreFactory;
 import io.zeebe.snapshots.raft.PersistableSnapshot;
@@ -166,6 +167,39 @@ public final class StateControllerImplTest {
     assertThat(snapshot)
         .extracting(PersistedSnapshot::getCompactionBound)
         .isEqualTo(firstSnapshot.getCompactionBound());
+    assertThat(snapshot.getId()).isNotEqualTo(firstSnapshot.getId());
+    final var newSnapshotId = FileBasedSnapshotMetadata.ofFileName(snapshot.getId()).orElseThrow();
+    final var firstSnapshotId =
+        FileBasedSnapshotMetadata.ofFileName(firstSnapshot.getId()).orElseThrow();
+    assertThat(firstSnapshotId.compareTo(newSnapshotId)).isEqualTo(-1);
+  }
+
+  @Test
+  public void shouldTakeSnapshotWhenProcessorPositionNotChanged() {
+    // given
+    final var snapshotPosition = 2;
+    exporterPosition.set(snapshotPosition);
+    snapshotController.openDb();
+    final var firstSnapshot =
+        snapshotController
+            .takeTransientSnapshot(snapshotPosition)
+            .map(PersistableSnapshot::persist)
+            .orElseThrow();
+
+    // when
+    exporterPosition.set(snapshotPosition + 1);
+    final var tmpSnapshot = snapshotController.takeTransientSnapshot(snapshotPosition);
+    final var snapshot = tmpSnapshot.map(TransientSnapshot::persist).orElseThrow();
+
+    // then
+    assertThat(snapshot)
+        .extracting(PersistedSnapshot::getCompactionBound)
+        .isEqualTo(firstSnapshot.getCompactionBound());
+    assertThat(snapshot.getId()).isNotEqualTo(firstSnapshot.getId());
+    final var newSnapshotId = FileBasedSnapshotMetadata.ofFileName(snapshot.getId()).orElseThrow();
+    final var firstSnapshotId =
+        FileBasedSnapshotMetadata.ofFileName(firstSnapshot.getId()).orElseThrow();
+    assertThat(firstSnapshotId.compareTo(newSnapshotId)).isEqualTo(-1);
   }
 
   @Test

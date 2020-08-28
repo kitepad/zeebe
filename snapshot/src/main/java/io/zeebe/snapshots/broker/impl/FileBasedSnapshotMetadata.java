@@ -44,7 +44,7 @@ public final class FileBasedSnapshotMetadata implements SnapshotId {
     return ofFileName(path.getFileName().toString());
   }
 
-  static Optional<FileBasedSnapshotMetadata> ofFileName(final String name) {
+  public static Optional<FileBasedSnapshotMetadata> ofFileName(final String name) {
     final var parts = name.split("-");
     Optional<FileBasedSnapshotMetadata> metadata = Optional.empty();
 
