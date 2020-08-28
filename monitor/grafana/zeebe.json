@@ -1550,7 +1550,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Not updated exporter position",
+          "title": "Number of records exported but not acknowledged",
           "type": "gauge"
         },
         {
