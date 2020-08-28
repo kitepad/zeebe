@@ -7,6 +7,7 @@
  */
 package io.zeebe.broker.system.configuration;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.atomix.storage.StorageLevel;
@@ -66,5 +67,22 @@ public class DataCfgTest {
     // then
     final var actual = sutDataCfg.getAtomixStorageLevel();
     assertThat(actual).isEqualTo(StorageLevel.DISK);
+  }
+
+  @Test
+  public void shouldSetWatermarksTo1IfDisabled() {
+    // given
+    final DataCfg dataCfg = new DataCfg();
+    dataCfg.setDiskUsageCommandWatermark(0.1);
+    dataCfg.setDiskUsageReplicationWatermark(0.2);
+    dataCfg.setDiskUsageWatermarkEnabled(false);
+
+    // when
+    dataCfg.init(new BrokerCfg(), "/base");
+
+    // then
+    assertThat(dataCfg.isDiskUsageWatermarkEnabled()).isEqualTo(false);
+    assertThat(dataCfg.getDiskUsageCommandWatermark()).isEqualTo(1.0);
+    assertThat(dataCfg.getDiskUsageReplicationWatermark()).isEqualTo(1.0);
   }
 }
