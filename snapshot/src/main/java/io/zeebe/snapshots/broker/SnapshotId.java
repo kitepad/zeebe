@@ -50,7 +50,8 @@ public interface SnapshotId extends Comparable<SnapshotId> {
   default int compareTo(final SnapshotId other) {
     return Comparator.comparingLong(SnapshotId::getTerm)
         .thenComparing(SnapshotId::getIndex)
-        .thenComparing(SnapshotId::getTimestamp)
+        .thenComparing(SnapshotId::getProcessedPosition)
+        .thenComparing(SnapshotId::getExportedPosition)
         .compare(this, other);
   }
 }

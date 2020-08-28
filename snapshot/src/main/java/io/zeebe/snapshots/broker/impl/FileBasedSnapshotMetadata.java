@@ -54,7 +54,7 @@ public final class FileBasedSnapshotMetadata implements SnapshotId {
         final var term = Long.parseLong(parts[1]);
         final var timestamp = Long.parseLong(parts[2]);
         final var processedPosition = Long.parseLong(parts[3]);
-        final var exporterPostion = Long.parseLong(parts[4]);
+        final var exporterPosition = Long.parseLong(parts[4]);
 
         metadata =
             Optional.of(
@@ -63,7 +63,7 @@ public final class FileBasedSnapshotMetadata implements SnapshotId {
                     term,
                     WallClockTimestamp.from(timestamp),
                     processedPosition,
-                    exporterPostion));
+                    exporterPosition));
       } catch (final NumberFormatException e) {
         LOGGER.warn("Failed to parse part of snapshot metadata", e);
       }
