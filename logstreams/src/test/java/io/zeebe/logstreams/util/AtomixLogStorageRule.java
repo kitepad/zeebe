@@ -194,6 +194,7 @@ public final class AtomixLogStorageRule extends ExternalResource
     }
 
     indexMapping = ZeebeIndexAdapter.ofDensity(1);
+    persistedSnapshotStore = new NoopSnapshotStore();
     raftStorage =
         builder
             .apply(buildDefaultStorage())
