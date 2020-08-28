@@ -163,8 +163,11 @@ public class FileBasedReceivedSnapshot implements ReceivedSnapshot {
   }
 
   private boolean isSnapshotIdInvalid(final String snapshotId) {
-    final var expectedSnapshotId = metadata.getSnapshotIdAsString();
-    return !expectedSnapshotId.equals(snapshotId);
+    final var receivedSnapshotId = FileBasedSnapshotMetadata.ofFileName(snapshotId);
+    if (receivedSnapshotId.isEmpty()) {
+      return true;
+    }
+    return metadata.compareTo(receivedSnapshotId.get()) != 0;
   }
 
   private boolean writeReceivedSnapshotChunk(
